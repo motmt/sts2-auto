@@ -1,0 +1,12 @@
+{
+  "id": "ConsoleSyncGuard",
+  "name": "ConsoleSyncGuard 联机控制台卫士",
+  "author": "WorkBuddy@尖塔模组",
+  "description": "杀戮尖塔2 联机中使用开发控制台(按~)不再数据不同步。默认主机权威模式:客机输入的改状态指令会被本地拦截并提示由房主(主机)执行,避免只在一端生效导致 GameSync 校验失败/被踢。可选宽松模式(允许客机直接发指令,走官方同步队列)。附带 mpstatus/mpmode/mphelp 诊断命令。",
+  "version": "v0.1.0",
+  "has_pck": false,
+  "has_dll": true,
+  "dependencies": [],
+  "affects_gameplay": false,
+  "min_game_version": "0.111.0"
+}

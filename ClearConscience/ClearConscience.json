@@ -1,0 +1,12 @@
+{
+  "id": "ClearConscience",
+  "name": "问心无愧 (ClearConscience)",
+  "author": "WorkBuddy@尖塔模组",
+  "description": "战败不清档（塔一《问心无愧》联动版）：战败后的结算屏会多出一个『问心无愧』按钮——点它保留存档，回主菜单『继续』（联机则多人菜单『读取』，由房主继续）可回到本层重打；不点、直接返回主菜单则正常清档。胜利与主动放弃也正常清档。默认开启，控制台 cc off 可关闭。联机时只需房主安装。",
+  "version": "v1.1.0",
+  "has_pck": false,
+  "has_dll": true,
+  "dependencies": [],
+  "affects_gameplay": false,
+  "min_game_version": "0.111.0"
+}

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>ConsoleSyncGuard</AssemblyName>
+    <RootNamespace>ConsoleSyncGuard</RootNamespace>
+    <!-- 不往输出路径追加 tfm，方便直接拷 dll -->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+    <!-- 游戏数据目录（包含 sts2.dll / 0Harmony.dll）。可用 -p:Sts2DataDir=... 覆盖 -->
+    <Sts2DataDir>E:\steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64</Sts2DataDir>
+    <!-- 游戏 mods 安装目录（构建后自动拷贝；不存在则跳过） -->
+    <GameModsDir>E:\steam\steamapps\common\Slay the Spire 2\mods</GameModsDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="sts2">
+      <HintPath>$(Sts2DataDir)\sts2.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(Sts2DataDir)\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

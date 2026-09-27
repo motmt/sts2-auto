@@ -1,0 +1,12 @@
+{
+  "id": "StealthKit",
+  "name": "StealthKit 潜行助手",
+  "author": "WorkBuddy@尖塔模组",
+  "description": "联机潜行助手 v0.4: ①注入愿望(stealth wishcard 卡名)→ 下一层卡牌奖励第三张变成你选的卡,全队画面/历史天然一致(需全队同版本启用本mod);②give 定向送原版卡/遗物/药水/金币(仅需自己装,走官方商店同步通道,不不同步);③休息点自动回复;全部中文名搜索、免记ID。",
+  "version": "v0.4.0",
+  "has_pck": false,
+  "has_dll": true,
+  "dependencies": [],
+  "affects_gameplay": false,
+  "min_game_version": "0.111.0"
+}

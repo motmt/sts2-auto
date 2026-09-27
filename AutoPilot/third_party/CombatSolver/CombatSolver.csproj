@@ -1,0 +1,61 @@
+<Project Sdk="Godot.NET.Sdk/4.5.1">
+  <!-- ==========================================================================
+       CombatSolver —— 融合进 AutoPilot 仓库的子工程（third_party）
+       来源：Torch1230/CombatSolver v0.46.4（见 THIRD_PARTY_NOTICES.md）
+       本文件相对原版仅改动"本机路径"与"输出目录"，源码零改动。
+       ========================================================================== -->
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>13.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>CombatSolver</RootNamespace>
+    <Version>0.46.4</Version>
+    <NoWarn>$(NoWarn);CS0436</NoWarn>
+
+    <!-- ── 本机路径（相对原版唯一实质改动）───────────────────────────── -->
+    <SteamRoot>E:\steam</SteamRoot>
+    <Sts2Dir>E:\steam\steamapps\common\Slay the Spire 2</Sts2Dir>
+    <Sts2DataDir>$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
+    <RitsuWorkshopRoot>$(SteamRoot)\steamapps\workshop\content\2868840\3747602295</RitsuWorkshopRoot>
+    <RitsuLibDir>$(RitsuWorkshopRoot)/lib/0.111.0</RitsuLibDir>
+    <RitsuLibReferenceTarget>0.111.0</RitsuLibReferenceTarget>
+    <RitsuLibReferencesProps>$(RitsuWorkshopRoot)/RitsuLib.References.props</RitsuLibReferencesProps>
+
+    <!-- 融合模式：不自动拷到 mods（由 AutoPilot 的统一部署脚本负责） -->
+    <CopyModOnBuild>false</CopyModOnBuild>
+    <ModOutputDir>$(Sts2Dir)/mods/CombatSolver</ModOutputDir>
+
+    <MemoryCleanerProject>$(MSBuildProjectDirectory)/tools/CombatSolver.MemoryCleaner/CombatSolver.MemoryCleaner.csproj</MemoryCleanerProject>
+    <MemoryCleanerOutput>$(MSBuildProjectDirectory)/tools/CombatSolver.MemoryCleaner/bin/$(Configuration)/net48/CombatSolver.MemoryCleaner.exe</MemoryCleanerOutput>
+  </PropertyGroup>
+
+  <Import Project="$(RitsuLibReferencesProps)" Condition="Exists('$(RitsuLibReferencesProps)')" />
+
+  <ItemGroup>
+    <Compile Remove="tools/**/*.cs" />
+    <Compile Remove="outputs/**/*.cs" />
+    <EmbeddedResource Include="src/UI/English.json" LogicalName="CombatSolver.UI.English.json" />
+    <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="all" />
+    <Publicize Include="sts2" IncludeVirtualMembers="false" IncludeCompilerGeneratedMembers="false" />
+    <InternalsVisibleTo Include="OfflineSearchHarness" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="sts2" HintPath="$(Sts2DataDir)/sts2.dll" Private="false" />
+    <Reference Include="0Harmony" HintPath="$(Sts2DataDir)/0Harmony.dll" Private="false" />
+    <Reference Include="GodotSharp" HintPath="$(Sts2DataDir)/GodotSharp.dll" Private="false" />
+    <Reference Include="STS2-RitsuLib" HintPath="$(RitsuLibDir)/STS2-RitsuLib.dll" Private="false"
+               Condition="!Exists('$(RitsuLibReferencesProps)')" />
+  </ItemGroup>
+
+  <Target Name="ValidateSts2GameInstall" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(Sts2DataDir)/sts2.dll')" Text="找不到 $(Sts2DataDir)/sts2.dll。请检查 SteamRoot。" />
+    <Error Condition="!Exists('$(RitsuLibReferencesProps)') and !Exists('$(RitsuLibDir)/STS2-RitsuLib.dll')"
+           Text="找不到当前游戏版本的 RitsuLib。请检查 SteamRoot/RitsuWorkshopRoot。" />
+  </Target>
+
+</Project>

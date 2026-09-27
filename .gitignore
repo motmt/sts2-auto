@@ -1,0 +1,39 @@
+# ── .NET 构建产物 ─────────────────────────────────────────
+bin/
+obj/
+dist/
+*.user
+*.suo
+.vs/
+
+# ── Godot 构建缓存（CombatSolver 子工程）──────────────────
+.godot/
+*.godot.tmp
+
+# ── 本机工具链与参考源码（体积大 / 第三方版权）────────────
+.tools/
+.decomp/
+.refs/
+rundata/
+
+# ── 日志 ────────────────────────────────────────────────
+*.log
+build_*.log
+deploy.log
+sendcmd.log
+
+# ── 工作区私有数据 ───────────────────────────────────────
+.workbuddy/
+.workbuddy/memory/
+
+# ── 密钥（务必不入库）────────────────────────────────────
+AutoPilot_config.json
+*token*.json
+credential*
+*.key
+.env
+
+# ── 系统文件 ────────────────────────────────────────────
+Thumbs.db
+Desktop.ini
+.DS_Store

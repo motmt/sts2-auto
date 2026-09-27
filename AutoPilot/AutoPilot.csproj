@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>AutoPilot</AssemblyName>
+    <RootNamespace>AutoPilot</RootNamespace>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Version>2.8.0</Version>
+    <AssemblyVersion>2.8.0.0</AssemblyVersion>
+    <FileVersion>2.8.0.0</FileVersion>
+
+    <!-- 游戏数据目录（含 sts2.dll / 0Harmony.dll / GodotSharp.dll），可 -p:Sts2DataDir=... 覆盖 -->
+    <Sts2DataDir>E:\steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64</Sts2DataDir>
+  </PropertyGroup>
+
+  <!-- ⚠️ 融合子工程隔离：third_party/ 下的 CombatSolver 有 709 个 .cs，
+       必须从 AutoPilot 的隐式编译 glob 中排除（它由自己的 csproj 独立编译）。
+       否则 Microsoft.NET.Sdk 会递归吞掉它们 → 缺 RitsuLib 引用 / 缺 unsafe → 数百错误。 -->
+  <ItemGroup>
+    <Compile Remove="third_party\**\*.cs" />
+    <Compile Remove="third_party/**/*.cs" />
+    <None Remove="third_party\**\*" />
+    <EmbeddedResource Remove="third_party\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="sts2">
+      <HintPath>$(Sts2DataDir)\sts2.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(Sts2DataDir)\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="GodotSharp">
+      <HintPath>$(Sts2DataDir)\GodotSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
